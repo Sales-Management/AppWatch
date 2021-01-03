@@ -1,18 +1,29 @@
 package com.example.appwatch;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
 
+
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
     private List<Product> mListProduct;
     private IClickAddToCartListener iClickAddToCartListener;
 
@@ -32,6 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product,parent,false);
        return new ProductViewHolder(view);
+
 
     }
 
@@ -58,6 +70,30 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
            }
        });
 
+        holder.tvDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //xu ly trong nay
+                Intent intent = new Intent(v.getContext(), ProductDescriptionActivity.class);
+
+                intent.putExtra("description",product.getDescription());
+                v.getContext().startActivity(intent);
+
+            }
+        });
+
+        holder.tvProductname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProductDescriptionActivity.class);
+                intent.putExtra("position", product.getId());
+                v.getContext().startActivity(intent);
+                //Code edit
+
+
+            }
+        });
+
     }
 
     @Override
@@ -71,7 +107,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder{
         private ImageView imgProduct;
         private TextView tvProductname;
-        private TextView tvDescription;
+        private Button tvDescription;
         private ImageView imgAddToCart;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -79,8 +115,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             imgProduct = itemView.findViewById(R.id.img_product);
             tvProductname = itemView.findViewById(R.id.tv_product_name);
-            tvDescription = itemView.findViewById(R.id.tv_description);
+            tvDescription = itemView.findViewById(R.id.btn_description);
             imgAddToCart = itemView.findViewById(R.id.img_add_to_cart);
         }
     }
+
+
 }

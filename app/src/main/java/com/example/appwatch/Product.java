@@ -1,7 +1,11 @@
 package com.example.appwatch;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+@IgnoreExtraProperties
 public class Product {
 
+    //Model
+    private int Id;
     private int resourceId;
     private String name;
     private String description;
@@ -12,6 +16,11 @@ public class Product {
         this.name = name;
         this.description=description;
     }
+
+    public Product(){
+
+    }
+
 
     public int getResourceId() {
         return resourceId;
@@ -41,5 +50,13 @@ public class Product {
     }
     public void setAddToCart(boolean addToCart){
         isAddToCart = addToCart;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 }

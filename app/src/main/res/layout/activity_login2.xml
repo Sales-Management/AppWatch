@@ -20,9 +20,11 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="252dp"
-        android:layout_height="39dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Đăng Nhập Tài Khoản"
+        android:textSize="25dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

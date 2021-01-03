@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +14,14 @@ import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnDangky;
+    Button btnDangky, btnDn;
     EditText edtEmail, edtPassword;
     FirebaseAuth mAuthencation;
 
@@ -31,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
         Anhxa();
 
+        btnDn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), login.class);
+                startActivity(intent);
+
+            }
+        });
         btnDangky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    
 
     private void DangKy(){
         String email = edtEmail.getText().toString();
@@ -62,10 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
                         // ...
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("Binh", "áđá");
+            }
+        });
 
     }
     private void Anhxa(){
+        btnDn = (Button) findViewById(R.id.btnDn);
         btnDangky = (Button) findViewById(R.id.btnDangKy);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
